@@ -7,6 +7,33 @@
 
     require_once 'db_config.php';
 
-    $mysqli = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
-    $data = json_decode(file_get_contents("index.html"));
+    $mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+
+    if (mysqli_connect_errno()) {
+        echo mysqli_connect_error();
+        exit();
+    }
+    
+    $data = json_decode(file_get_contents("php://input"));
+
+    $respondCB = $data->toRespond == "on" ? 1
+     : 0;
+
+    print_r($respondCB);
+
+  
+
+
+    $mysqli->query("INSERT INTO contacts (email, comment, respond) VALUES ('$data->email', '$data->comment', $respondCB)");
+
+    // echo $mysqli->error;
+    
+    /* close connection */
+    $mysqli->close();
+
+    echo  "Success!";
+    
+    /* close connection */
+    //$mysqli->close();
+
 ?>
