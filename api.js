@@ -45,14 +45,12 @@ function ValidateEmail(email){
 
     if (email.value.match(validRegex)) {
       
-        alert("Valid email address!");
-        document.form1.text1.focus();
+        alert("Valid email address!");       
         return true;
   
     } else {
 
         alert("Invalid email address!");  
-        document.form1.text1.focus(); 
         return false;
     }
 }
