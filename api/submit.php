@@ -16,24 +16,17 @@
     
     $data = json_decode(file_get_contents("php://input"));
 
-    $respondCB = $data->toRespond == "on" ? 1
-     : 0;
-
-    print_r($respondCB);
-
-  
+    $respondCB = $data->toRespond == "" ? 0
+     : 1 ;
 
 
-    $mysqli->query("INSERT INTO contacts (email, comment, respond) VALUES ('$data->email', '$data->comment', $respondCB)");
+    //print_r($respondCB);
 
-    // echo $mysqli->error;
+     $mysqli->query("INSERT INTO contacts (email, comment, respond) VALUES ('$data->email', '$data->comment', $respondCB)");
+
     
     /* close connection */
     $mysqli->close();
 
-    echo  "Success!";
-    
-    /* close connection */
-    //$mysqli->close();
 
 ?>

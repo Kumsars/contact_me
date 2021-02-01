@@ -1,5 +1,5 @@
 var emailValue = document.getElementById('email');
-console.log(emailValue);
+
 
 function send(event){
 
@@ -14,8 +14,7 @@ function send(event){
     //validācija
 
     if(ValidateEmail(emailValue)){
-
-        alert("Yeeeeey!"); 
+ 
         fetch('api/submit.php', {
             method: 'POST', // or 'PUT'
             headers: 
