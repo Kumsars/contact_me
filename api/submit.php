@@ -13,16 +13,25 @@
         echo mysqli_connect_error();
         exit();
     }
-    
+
+    if ($mysqli->connect_errno) {
+        echo "Connect failed: %s\n".$mysqli->connect_error;
+        exit();
+    }
+
+
     $data = json_decode(file_get_contents("php://input"));
 
     $respondCB = $data->toRespond == "" ? 0
      : 1 ;
 
+     if (!$mysqli -> query("INSERT INTO contacts (email, comment) VALUES ('$data->email', '$data->comment')")) {
+        echo "Error description: ". $mysqli -> error;
+      }
+      
+    
 
-    //print_r($respondCB);
-
-     $mysqli->query("INSERT INTO contacts (email, comment, respond) VALUES ('$data->email', '$data->comment', $respondCB)");
+     //$mysqli->query("INSERT INTO contacts (email, comment, respond) VALUES ('$data->email', '$data->comment', $respondCB)");
 
     
     /* close connection */
