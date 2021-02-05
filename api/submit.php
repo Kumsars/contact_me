@@ -25,14 +25,14 @@
     $respondCB = $data->toRespond == "" ? 0
      : 1 ;
 
-     if (!$mysqli -> query("INSERT INTO contacts (email, comment) VALUES ('$data->email', '$data->comment')")) {
-        echo "Error description: ". $mysqli -> error;
-        echo "Upps";
-      }
+    //  if (!$mysqli -> query("INSERT INTO contacts (email, comment,) VALUES ('$data->email', '$data->comment')")) {
+    //     echo "Error description: ". $mysqli -> error;
+    //     echo "Upps";
+    //   }
       
     
 
-     //$mysqli->query("INSERT INTO contacts (email, comment, respond) VALUES ('$data->email', '$data->comment', $respondCB)");
+     $mysqli->query("INSERT INTO contacts (email, comment, respond) VALUES ('$data->email', '$data->comment', $respondCB)");
 
     
     /* close connection */
