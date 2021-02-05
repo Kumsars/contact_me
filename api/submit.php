@@ -25,7 +25,7 @@
     $respondCB = $data->toRespond == "" ? 0
      : 1 ;
 
-     if (!$mysqli -> query("INSERT INTO contacts (email, comment,) VALUES ('$data->email', '$data->comment', '$respondCB')")) {
+     if (!$mysqli -> query("INSERT INTO contacts (email, comment, torespond) VALUES ('$data->email', '$data->comment', '$respondCB')")) {
         echo "Error description: ". $mysqli -> error;
         echo "Upps";
       }
