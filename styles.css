@@ -13,3 +13,8 @@ form {
 body{
     background-color: aquamarine;
 }
+
+.btn-outline-primary{
+    color: #ffffff;
+    border-color: #ffffff;
+}
