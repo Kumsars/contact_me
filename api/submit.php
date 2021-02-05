@@ -27,6 +27,7 @@
 
      if (!$mysqli -> query("INSERT INTO contacts (email, comment) VALUES ('$data->email', '$data->comment')")) {
         echo "Error description: ". $mysqli -> error;
+        echo "Upps";
       }
       
     
