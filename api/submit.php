@@ -29,9 +29,6 @@
         echo "Error description: ". $mysqli -> error;
       }
       
-    
-
-     //$mysqli->query("INSERT INTO contacts (email, comment, respond) VALUES ('$data->email', '$data->comment', $respondCB)");
 
     
     /* close connection */
