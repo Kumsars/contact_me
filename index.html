@@ -6,13 +6,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
     <title>Contact me</title>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script type="text/javascript">
-        var onloadCallback = function() {
-          grecaptcha.render('html_element', {
-            'sitekey' : 'your_site_key'
-          });
-        };
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+        function onSubmit(token) {
+          document.getElementById("formId").submit();
+        }
       </script>
 </head>
 <body>
@@ -35,18 +33,17 @@
             </div>
             
             <div class="form-group">
-                <div class="g-recaptcha" data-sitekey="6Ld7Kk8aAAAAAB9-7jC13pma0aUqoSR0rO-09mxA"></div>
-                <button type="submit" class="btn btn-primary btn-lg">Send</button>
+                <button type="submit" class="btn btn-primary btn-lg g-recaptcha"  data-sitekey="6LfmQU8aAAAAAK0x4dX8cxiVhoH8aeL94pBVfmVG" data-action='submit'>Send</button>    
             </div>
         </div>
     </form>
 
-    <script src="api.js"></script>
-    <script type="text/javascript">
-        var onloadCallback = function() {
-          alert("grecaptcha is ready!");
-        };
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+    async defer>
     </script>
+  
+    <script src="api.js"></script>
+   
     
 </body>
 

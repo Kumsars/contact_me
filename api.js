@@ -2,7 +2,7 @@ var emailValue = document.getElementById('email');
 
 
 function send(event){
-
+    
      event.preventDefault();
      
     var formData = new FormData(event.target);
