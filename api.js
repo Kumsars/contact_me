@@ -7,7 +7,6 @@ function send(event){
 
    // event.preventDefault();
 
-
     let formValues = document.getElementById('formId');
     let formData = new FormData(formValues);
 
@@ -24,7 +23,6 @@ function send(event){
     
     formData.forEach((value, key) => object[key] = value);
 
-    console.log(object);
     //validation
 
     if(ValidateEmail(emailValue)){

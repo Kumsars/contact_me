@@ -6,6 +6,7 @@
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
     require_once 'db_config.php';
+   // include 'config.php';
 
     $mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
 
@@ -19,20 +20,21 @@
         exit();
     }
 
-
     $data = json_decode(file_get_contents("php://input"));
-
     $respondCB = $data->toRespond == "" ? 0
      : 1 ;
-
+    // if($_POST){
+    //     function getCaptcha($SecretKey){
+    //         $Response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".SECRET_KEY."&response={$SecretKey}");
+    //         $Return = json_decode($Response);
+    //         return $Return;
+    //     }
+    //     $Return = getCaptcha($_POST['g-recaptcha-response']);
+    //     var_dump($Return);
+    // }
      if (!$mysqli -> query("INSERT INTO contacts (email, comment, torespond) VALUES ('$data->email', '$data->comment', '$respondCB')")) {
         echo "Error description: ". $mysqli -> error;
       }
-      
-
-    
     /* close connection */
     $mysqli->close();
-
-
 ?>
