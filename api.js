@@ -1,20 +1,34 @@
 var emailValue = document.getElementById('email');
-
+var commentValue = document.getElementById('comment');
+var toRespondValue = document.getElementById('toRespond');
 
 function send(event){
+  //console.log("TOKEN: "+event);
+
+   // event.preventDefault();
+
+
+    let formValues = document.getElementById('formId');
+    let formData = new FormData(formValues);
+
+   // console.log(emailValue.value, commentValue.value,toRespondValue.value);
+
+    formData.append('email',emailValue.value);
+    formData.append('comment',commentValue.value);
+    formData.append('torespond',toRespondValue.value);
+
+    formData.forEach(value => console.log(value));
     
-     event.preventDefault();
-     
-    var formData = new FormData(event.target);
-    
+
     var object = {};
     
     formData.forEach((value, key) => object[key] = value);
-       
-    //validācija
+
+    console.log(object);
+    //validation
 
     if(ValidateEmail(emailValue)){
- 
+        //if valid->fetch
         fetch('api/submit.php', {
             method: 'POST', // or 'PUT'
             headers: 
