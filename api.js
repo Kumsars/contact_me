@@ -4,19 +4,18 @@ var toRespondValue = document.getElementById('toRespond');
 
 function send(event){
   //console.log("TOKEN: "+event);
-
    // event.preventDefault();
-
-    let formValues = document.getElementById('formId');
-    let formData = new FormData(formValues);
-
+    // let formValues = document.getElementById('formId');
+    // let formData = new FormData(formValues);
    // console.log(emailValue.value, commentValue.value,toRespondValue.value);
    var object = {};
 
     object['email'] = emailValue.value;
     object['comment'] = commentValue.value;
     object['torespond'] = toRespondValue.value;
- 
+    object['token'] = event;
+
+    console.log(object);
     //validation
 
     if(ValidateEmail(emailValue)){
