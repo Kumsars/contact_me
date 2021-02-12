@@ -21,7 +21,7 @@
     }
 
     $data = json_decode(file_get_contents("php://input"));
-    $respondCB = $data->toRespond == "" ? 0
+    $respondCB = $data->torespond == "" ? 0
      : 1 ;
     // if($_POST){
     //     function getCaptcha($SecretKey){

@@ -11,18 +11,12 @@ function send(event){
     let formData = new FormData(formValues);
 
    // console.log(emailValue.value, commentValue.value,toRespondValue.value);
+   var object = {};
 
-    formData.append('email',emailValue.value);
-    formData.append('comment',commentValue.value);
-    formData.append('torespond',toRespondValue.value);
-
-    formData.forEach(value => console.log(value));
-    
-
-    var object = {};
-    
-    formData.forEach((value, key) => object[key] = value);
-
+    object['email'] = emailValue.value;
+    object['comment'] = commentValue.value;
+    object['torespond'] = toRespondValue.value;
+ 
     //validation
 
     if(ValidateEmail(emailValue)){
