@@ -8,44 +8,54 @@
     require_once 'db_config.php';
     include 'config.php';
 
-    $data = json_decode(file_get_contents("php://input"));
+    //Ieliekt $data mainīgajā sūtāmos datus
+    $data = json_decode(file_get_contents("php://input")); 
     $respondCB = $data->torespond == "" ? 0
      : 1 ;
     
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST[$data->token])) {
+    //Pārbauda, vai dati tiek sūtīti ar POST
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        // Build POST request:
+        
+        // Piešķir mainīgajiem vērtības
         $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
         $recaptcha_secret = SECRET_KEY;
-        $recaptcha_response = $_POST[$data->token];
+        $recaptcha_response = $data->token;
     
-        // Make and decode POST request:
+        // Veido POST requestu un saņem responsu
         $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
-        $recaptcha = json_decode($recaptcha);
-    
-        // Take action based on the score returned:
+
+        //echo $recaptcha; --- sagaidu json response
+        $recaptcha = json_decode($recaptcha);   
+        
+        //echo $recaptcha; --- sagaidu json response
+        // Pēc atgrieztā JSON pārbauda score
         if ($recaptcha->score >= 0.5) {
-            echo "SUCCESS";
+            //true
+             //Veido konekciju ar datu bāzi
+            $mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+
+            //Pārbauda konekciju
+            if (mysqli_connect_errno()) {
+                echo mysqli_connect_error();
+                exit();
+            }
+        
+            if ($mysqli->connect_errno) {
+                echo "Connect failed: %s\n".$mysqli->connect_error;
+                exit();
+            }
+            //Ja neizpildās INSERTs-> izvada error info
+            if (!$mysqli -> query("INSERT INTO contacts (email, comment, torespond) VALUES ('$data->email', '$data->comment', '$respondCB')")) {
+                echo "Error description: ". $mysqli -> error;
+            }
+            /* close connection */
+            $mysqli->close();
         } else {
-            // Not verified - show form error
+            // false
         }
 
     }   
 
-     $mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
-
-     if (mysqli_connect_errno()) {
-         echo mysqli_connect_error();
-         exit();
-     }
- 
-     if ($mysqli->connect_errno) {
-         echo "Connect failed: %s\n".$mysqli->connect_error;
-         exit();
-     }
-     if (!$mysqli -> query("INSERT INTO contacts (email, comment, torespond) VALUES ('$data->email', '$data->comment', '$respondCB')")) {
-        echo "Error description: ". $mysqli -> error;
-      }
-    /* close connection */
-    $mysqli->close();
+   
 ?>
