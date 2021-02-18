@@ -45,9 +45,16 @@
                 echo "Connect failed: %s\n".$mysqli->connect_error;
                 exit();
             }
+
+            $validEmail = htmlspecialchars($data->email, ENT_QUOTES);
+            $validComment = htmlspecialchars($data->comment, ENT_QUOTES);
+            $validRespond = htmlspecialchars($respondCB, ENT_QUOTES);
+            
             //Ja neizpildās INSERTs-> izvada error info
-            if (!$mysqli -> query("INSERT INTO contacts (email, comment, torespond) VALUES ('$data->email', '$data->comment', '$respondCB')")) {
+
+            if (!$mysqli -> query("INSERT INTO contacts (email, comment, torespond) VALUES ('$validEmail', '$validComment', '$validRespond')")) {
                 echo "Error description: ". $mysqli -> error;
+                
             }
             /* close connection */
             $mysqli->close();
