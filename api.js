@@ -3,11 +3,7 @@ var commentValue = document.getElementById('comment');
 var toRespondValue = document.getElementById('toRespond');
 
 function send(event){
-  //console.log("TOKEN: "+event);
-   // event.preventDefault();
-    // let formValues = document.getElementById('formId');
-    // let formData = new FormData(formValues);
-   // console.log(emailValue.value, commentValue.value,toRespondValue.value);
+
    var object = {};
 
     object['email'] = emailValue.value;
@@ -15,10 +11,11 @@ function send(event){
     object['torespond'] = toRespondValue.value;
     object['token'] = event;
 
-    console.log(toRespondValue.value);
+    var com4Validation = commentValue.value;
+   // console.log(commentValue.value);
     //validation
 
-    if(ValidateEmail(emailValue)){
+    if(ValidateFields(emailValue,com4Validation)){
         //if valid->fetch
         fetch('api/submit.php', {
             method: 'POST', // or 'PUT'
@@ -41,17 +38,19 @@ function send(event){
         //clear form after submit
         document.getElementById("formId").reset();
     }else{
-        alert("Invalid email address!");
-        document.getElementById("formId").reset();
+        alert("Invalid email address or empty comment");
+        
+        //document.getElementById("formId").reset(); --- Nav nepieciešams notirit formu pec nekorekta ievada
     }
     
    
 }
-function ValidateEmail(email){
+function ValidateFields(email, comment){
     
     var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-    if (email.value.match(validRegex)) {      
+
+    if (email.value.match(validRegex) && comment != "") {      
         return true;
     } else {  
         return false;
