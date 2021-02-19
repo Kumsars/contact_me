@@ -15,7 +15,7 @@ function send(event){
     object['torespond'] = toRespondValue.value;
     object['token'] = event;
 
-    console.log(object);
+    console.log(toRespondValue.value);
     //validation
 
     if(ValidateEmail(emailValue)){
