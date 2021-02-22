@@ -4,7 +4,7 @@ var toRespondValue = document.getElementById('toRespond');
 
 function send(event){
 
-   var object = {};
+    var object = {};
 
     object['email'] = emailValue.value;
     object['comment'] = commentValue.value;
@@ -12,7 +12,7 @@ function send(event){
     object['token'] = event;
 
     var com4Validation = commentValue.value;
-   // console.log(commentValue.value);
+    //console.log(commentValue.value);
     //validation
 
     if(ValidateFields(emailValue,com4Validation)){
@@ -29,22 +29,20 @@ function send(event){
         .then(data => {
             console.log('Success:', data);
             alert("Data is successfully sent!");
-   
+            document.getElementById("formId").reset();
         })
         .catch((error) => {
         console.error('Error:', error);
+        alert("Sorry! Nomething went wrong. We will fix it!");
         });
     
-        //clear form after submit
-        document.getElementById("formId").reset();
     }else{
         alert("Invalid email address or empty comment");
-        
-        //document.getElementById("formId").reset(); --- Nav nepieciešams notirit formu pec nekorekta ievada
+      
     }
     
-   
 }
+
 function ValidateFields(email, comment){
     
     var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
